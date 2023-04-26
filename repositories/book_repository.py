@@ -28,13 +28,13 @@ def select_all():
 
 
 
-
 def select(id):
     book = None
     sql = "SELECT * FROM books WHERE id = %s"
     values = [id]
-    result = run_sql(sql, values)
-    if result is not None:
+    results = run_sql(sql, values)
+    if results:
+        result = results[0]
         author = author_repo.select(result['author_id'])
         book = Book(result['title'], result['genre'], author, result['id'])
     return book
