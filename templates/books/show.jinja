@@ -1,4 +1,11 @@
 {% extends "base.jinja" %}
 {% block content %}
 Some info about this book.
+
+<p>Title: <b>{{book.title}}</b> </p>
+<p>Author: <b>{{book.author.name}}</b></p>
+<p>Genre: <b>{{book.genre}}</b></p>
+
+<p><a href = "/books">Back to Books</a></p>
+
 {% endblock %}
