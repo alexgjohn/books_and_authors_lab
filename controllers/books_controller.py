@@ -26,17 +26,6 @@ def add_book():
     return redirect('/books')
 
 
-# @tasks_blueprint.route("/tasks",  methods=['POST'])
-# def create_task():
-#     description = request.form['description']
-#     user_id     = request.form['user_id']
-#     duration    = request.form['duration']
-#     completed   = request.form['completed']
-#     user        = user_repository.select(user_id)
-#     task        = Task(description, user, duration, completed)
-#     task_repository.save(task)
-#     return redirect('/tasks')
-
 @books_blueprint.route('/books/<id>')
 def show_book(id):
     book = book_repo.select(id)
@@ -46,5 +35,30 @@ def show_book(id):
 def delete_book(id):
     book_repo.delete(id)
     return redirect('/books')
+
+@books_blueprint.route('/books/<id>/edit')
+def edit_book(id):
+    book = book_repo.select(id)
+    authors = author_repo.select_all()
+    return render_template('/books/edit.jinja', book_on_file=book, authors_on_file=authors)
+
+@books_blueprint.route('/books/<id>', methods=['POST'])
+def update_book(id):
+    title = request.form['title']
+    genre = request.form['genre']
+    author_id = request.form['author_id']
+    author = author_repo.select(author_id)
+    book = Book(title, genre, author, id)
+    book_repo.update(book)
+    return redirect('/books')
+
+#works but doesn't display author name
+@books_blueprint.route('/books/author/<id>')
+def show_books_by_author(id):
+    author = author_repo.select(id)
+    books_by_author = book_repo.books_by_author(author)
+    return render_template('books/index.jinja', books_in_list = books_by_author)
+
+
 
 

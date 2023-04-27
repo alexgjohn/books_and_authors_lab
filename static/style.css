@@ -2,3 +2,13 @@ img {
     height: 250px;
     width: 250px;
 }
+
+body > header {
+    background-color: rgb(189, 116, 27);
+    color: #fff
+}
+
+body > header > nav > ul  {
+    list-style: none;
+    text-decoration: none;
+}

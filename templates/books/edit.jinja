@@ -1,0 +1,28 @@
+{% extends "base.jinja" %}
+{% block content %}
+Let's edit this book!
+
+<form action="/books/{{ book_on_file.id }}" method="post">
+    <div>
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" value="{{ book_on_file.title }}" required autofocus>
+    </div>
+    <div>
+        <label for="genre">Genre:</label>
+        <input type="text" id="genre" name="genre" value="{{ book_on_file.genre }}" required>
+    </div>
+    <div>
+        <label for="author">Author:</label>
+        <select id="author" name="author_id">
+            {% for author in authors_on_file %}
+                <option value="{{ author.id }}"
+                {% if book_on_file.author.id == author.id %}selected="selected"{% endif %}
+                >{{ author.name }} </option>
+            {% endfor %}
+        </select>
+    </div>
+    <div>
+        <button type="submit">Update Book</button>
+    </div>
+</form>
+{% endblock %}

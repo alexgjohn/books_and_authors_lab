@@ -1,0 +1,10 @@
+{% extends "base.jinja" %}
+{% block content %}
+<h3>Meet Our Authors!</h3>
+
+{% for author in authors_list %}
+<p>
+    {{ author.name }} - <a href="books/author/{{ author.id }}">Click here to see their books!</a>
+</p>
+{% endfor %}
+{% endblock %}
